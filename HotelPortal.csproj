@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20191027190053_initial.cs" />
+    <Compile Remove="Migrations\20191027190053_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191028202608_second.cs" />
+    <Compile Remove="Migrations\20191028202608_second.Designer.cs" />
+    <Compile Remove="Migrations\20191030160853_third.cs" />
+    <Compile Remove="Migrations\20191030160853_third.Designer.cs" />
+    <Compile Remove="Migrations\20191030164513_initial.cs" />
+    <Compile Remove="Migrations\20191030164513_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191030180643_initial.cs" />
+    <Compile Remove="Migrations\20191030180643_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191030180813_initial.cs" />
+    <Compile Remove="Migrations\20191030180813_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191030182331_initial.cs" />
+    <Compile Remove="Migrations\20191030182331_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191031211950_initial.cs" />
+    <Compile Remove="Migrations\20191031211950_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191101091229_initial.cs" />
+    <Compile Remove="Migrations\20191101091229_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191101191702_initial.cs" />
+    <Compile Remove="Migrations\20191101191702_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191102003745_initial.cs" />
+    <Compile Remove="Migrations\20191102003745_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191102010120_initial.cs" />
+    <Compile Remove="Migrations\20191102010120_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191102132108_initial.cs" />
+    <Compile Remove="Migrations\20191102132108_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191102155534_initial.cs" />
+    <Compile Remove="Migrations\20191102155534_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191102162159_initial.cs" />
+    <Compile Remove="Migrations\20191102162159_initial.Designer.cs" />
+    <Compile Remove="Migrations\20191104060205_initial.cs" />
+    <Compile Remove="Migrations\20191104060205_initial.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.10" />
+  </ItemGroup>
+
+</Project>

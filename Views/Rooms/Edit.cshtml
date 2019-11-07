@@ -1,0 +1,64 @@
+﻿@using HotelPortal.Models.RoomViewModels
+@model RoomEditViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Room</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data" asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Capacity" class="control-label"></label>
+                <input asp-for="Capacity" class="form-control" />
+                <span asp-validation-for="Capacity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Images" class="control-label"></label>
+                <input asp-for="Images" type="file" multiple />
+                <span asp-validation-for="Images" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+        <div id="images">
+            @if (ViewBag.ImageIds != null)
+            {
+                foreach (var id in ViewBag.ImageIds)
+                {
+                    <div class="col-md-4">
+                        <input name="imageIDs" value="id" type="hidden">
+                        <img class="contentImage" src="@Url.Action("RoomImage", new {imageId = id})" width="50" height="50" />
+                        <input type="button" value="Remove" onclick="location.href='@Url.Action("RemoveRoomImage", new {imageId = id})'" />
+
+
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+<a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+
+
+<div>
+    <input type="button" value="GO BACK" class="btn btn-primary"
+           onclick="window.location.pathname = '/Rooms/Details/@Model.Id'" />
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

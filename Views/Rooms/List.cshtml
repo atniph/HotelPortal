@@ -1,0 +1,60 @@
+﻿@using HotelPortal.Models
+@model IList<Room>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="contentText">No rooms available.</div>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("Hotel")
+                </th>
+                <th>
+                    @Html.DisplayName("Room number")
+                </th>
+                <th>
+                    @Html.DisplayName("Capacity")
+                </th>
+                <th>
+                    @Html.DisplayName("Price")
+                </th>
+                <th>
+                    @Html.DisplayName("RoomImage")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hotel.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Capacity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        <img src="@Url.Action("RoomMainImage", new {parentId = item.Id})" class="contentImage" width="50" height="50" />
+                    </td>
+                    <td>
+                        <a asp-controller="Bookings" asp-action="Create" asp-route-id="@item.Id" class="contentLink">Reserve</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+

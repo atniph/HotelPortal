@@ -1,0 +1,110 @@
+﻿@using HotelPortal.Models.AccountViewModels
+@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-controller="Account" asp-action="Register" asp-route-returnurl="@ViewData["ReturnUrl"]">
+
+            <table>
+                <tr>
+                    <td colspan="3">
+                        <div class="failureNotification">@Html.ValidationSummary(true, "Registration failed!")</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="contentHead">
+                            Személyes adatok:
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="120">
+                        Név:
+                    </td>
+                    <td class="failureNotification" colspan="2">
+                        <input asp-for="Name" size="40" />
+                        <span asp-validation-for="Name"></span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td width="120">
+                        Számlázási cím:
+                    </td>
+                    <td class="failureNotification" colspan="2">
+                        <input asp-for="Address" size="40" />
+                        <span asp-validation-for="Address"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="120">
+                        E-mail cím:
+                    </td>
+                    <td class="failureNotification" colspan="2">
+                        <input asp-for="Email" size="40" />
+                        <span asp-validation-for="Email"></span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td width="8">
+                        ID Number:
+                    </td>
+                    <td class="failureNotification" colspan="2">
+                        <input asp-for="IDNumber" size="40" />
+                        <span asp-validation-for="IDNumber"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <div class="contentHead">
+                            Bejelentkezési adatok:
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150" colspan="2">
+                        Felhasználónév:
+                    </td>
+                    <td class="failureNotification">
+                        <input asp-for="UserName" />
+                        <span asp-validation-for="UserName"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150" colspan="2">
+                        Jelszó:
+                    </td>
+                    <td class="failureNotification">
+                        <input asp-for="Password" />
+                        <span asp-validation-for="Password"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="150" colspan="2">
+                        Jelszó megismétlése:
+                    </td>
+                    <td class="failureNotification">
+                        <input asp-for="ConfirmPassword" />
+                        <span asp-validation-for="ConfirmPassword"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" height="70">
+                        <input type="submit" value="Regisztráció" class="button" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

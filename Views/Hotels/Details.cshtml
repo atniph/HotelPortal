@@ -1,0 +1,114 @@
+﻿@model HotelPortal.Models.Hotel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+
+
+<div class="body-content">
+    <h4>Hotel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stars)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stars)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City.Id)
+        </dd>
+    </dl>
+    <div id="images">
+        @if (ViewBag.ImageIds != null)
+        {
+            foreach (var id in ViewBag.ImageIds)
+            {
+                <div class="col-md-4">
+                    <input name="imageIDs" value="id" type="hidden">
+                    <img class="contentImage" src="@Url.Action("HotelImage", new {imageId = id})" width="50" height="50" />
+                </div>
+            }
+        }
+    </div>
+
+
+    <a asp-controller="Reviews" asp-action="Create" asp-route-hotelId="@Model.Id" class="contentLink">Write a Review</a> |
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+
+<div class="right">
+    <h4>Reviews</h4>
+    @if (ViewBag.Reviews != null)
+    {
+        foreach (var r in ViewBag.Reviews)
+        {
+            <p>Stars: @r.Stars <br />@r.Description</p>
+            @if (User.IsInRole("Admin"))
+            {
+                <input type="button" value="Remove review" onclick="location.href='@Url.Action("Delete", "Reviews", new {id = r.Id})'" />
+            }
+            <br />
+        }
+    }
+</div>
+<table>
+    <h4>Rooms</h4>
+    @foreach (Room room in Model.Rooms)
+    {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-controller="Rooms" asp-route-id="@room.Id">Room details</a> |
+                <a asp-action="Edit" asp-controller="Rooms" asp-route-id="@room.Id">Edit room</a> |
+                <a asp-controller="Bookings" asp-action="Create" asp-route-id="@room.Id">Reserve room</a>
+                <div>
+                    Room Id: @room.Id
+                </div>
+                <div>
+                    Room Capacity: @room.Capacity
+                </div>
+                <div>
+                    Room Price:@room.Price
+                </div>
+                <div class="col-md-4">
+                    <img class="contentImage" src="@Url.Action("RoomMainImage","Rooms", new {parentId = room.Id})" width="50" height="50" />
+                </div>
+
+            </td>
+        </tr>
+    }
+</table>

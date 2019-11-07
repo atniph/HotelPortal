@@ -1,0 +1,43 @@
+﻿@model HotelPortal.Models.Room
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Room</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Capacity)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Capacity)
+        </dd>
+    </dl>
+    <div id="images">
+        @if (ViewBag.ImageIds != null)
+        {
+            foreach (var id in ViewBag.ImageIds)
+            {
+                <div class="col-md-4">
+                    <input name="imageIDs" value="id" type="hidden">
+                    <img class="contentImage" src="@Url.Action("RoomImage", new {imageId = id})" width="50" height="50" />
+                </div>
+            }
+        }
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <input type="button" value="GO BACK" class="btn btn-primary"
+           onclick="window.location.pathname = '/Hotels/Details/@Model.HotelId'" />
+</div>
