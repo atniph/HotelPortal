@@ -2050,6 +2050,7 @@ pre code {
   }
   .col-md-4 {
     width: 33.33333333%;
+    border:3px solid #337ab7;
   }
   .col-md-3 {
     width: 25%;
@@ -3920,6 +3921,7 @@ tbody.collapse.in {
   line-height: 1.3333333;
   border-radius: 6px;
 }
+
 select.input-group-lg > .form-control,
 select.input-group-lg > .input-group-addon,
 select.input-group-lg > .input-group-btn > .btn {

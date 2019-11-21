@@ -4,25 +4,26 @@
     ViewData["Title"] = "Index";
 }
 <div>
-    <div class="search">    
-        @if (ViewBag.Cities != null)            
-        {                
-            @using (Html.BeginForm("List", "Rooms", FormMethod.Get))            
-            {            
-                <p>City:</p> @Html.DropDownList("cityId", new SelectList(ViewBag.Cities, "Id", "Name"))                
-                <p>Min stars:</p> @Html.DropDownList("stars", new SelectList(new List<int> { 1, 2, 3, 4, 5 }))                
-                <p>Min price:</p>@Html.TextBox("min", "", new { @type = "number", @min = 0 })                
-                <p>Max price:</p>@Html.TextBox("max", "", new { @type = "number", @min = 0 })                
-                <p>Number of Guests:</p>@Html.TextBox("guest", "", new { @type = "number", @min = 0 })                
-                <p>From:</p>@Html.TextBox("from", "", new { @type = "date", required = "required" })                
-                <p>To:</p>@Html.TextBox("to", "", new { @type = "date", required = "required" })                
-                <div>                
-                    <input type="submit" value="Search" />                    
-                </div>                
-             }            
-        }     
-    </div>    
-</div>
+    <div>
+        <div class="search">    
+            @if (ViewBag.Cities != null)            
+            {                
+                @using (Html.BeginForm("List", "Rooms", FormMethod.Get))            
+                {            
+                    <p>City:</p> @Html.DropDownList("cityId", new SelectList(ViewBag.Cities, "Id", "Name"))                
+                    <p>Min stars:</p> @Html.DropDownList("stars", new SelectList(new List<int> { 1, 2, 3, 4, 5 }))                
+                    <p>Min price:</p>@Html.TextBox("min", "", new { @type = "number", @min = 0 })                
+                    <p>Max price:</p>@Html.TextBox("max", "", new { @type = "number", @min = 0 })                
+                    <p>Number of Guests:</p>@Html.TextBox("guest", "", new { @type = "number", @min = 0 })                
+                    <p>From:</p>@Html.TextBox("from", "", new { @type = "date", required = "required" })                
+                    <p>To:</p>@Html.TextBox("to", "", new { @type = "date", required = "required" })                
+                    <div>                
+                        <input type="submit" value="Search" />                    
+                    </div>                
+                 }            
+            }     
+        </div>    
+    </div>
     <h2>Index</h2>
     @if (User.IsInRole("Admin"))
     {
@@ -58,36 +59,40 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @if (Model != null)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Latitude)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Longitude)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Stars)
-                    </td>
-                    <td>
-                        <img src="@Url.Action("HotelMainImage", new {parentId = item.Id})" class="contentImage" width="50" height="50" />
-                    </td>
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
-                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Latitude)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Longitude)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.City.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Stars)
+                        </td>
+                        <td>
+                            <img src="@Url.Action("HotelMainImage", new { parentId = item.Id })" class="contentImage" width="50" height="50" />
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
+</div>

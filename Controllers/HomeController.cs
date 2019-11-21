@@ -8,7 +8,7 @@ namespace HotelPortal.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            return View(@"../Hotels/Index");
         }
 
         public IActionResult About()
