@@ -41,22 +41,22 @@ namespace HotelPortal.Data
                 Email = Configuration.GetSection("AppSettings")["UserEmail"]
             };
 
-            var admin1 = new SiteUser
+            var admin = new SiteUser
             {
-                UserName = "Admin1",
-                Email = "admin1@admin1.com"
+                UserName = "admin",
+                Email = "admin@admin.com",
             };
 
-            string userPassword = Configuration.GetSection("AppSettings")["UserPassword"];
+            string userPassword = Configuration.GetSection("AppSettings")["UserPassword1."];
             var user = await UserManager.FindByEmailAsync(Configuration.GetSection("AppSettings")["UserEmail"]);
 
-            if (true /*user == null*/)
+            if (user == null)
             {
-                var createPowerUser = await UserManager.CreateAsync(admin1, "Admin1");
+                var createPowerUser = await UserManager.CreateAsync(admin, "Admin1.");
                 if (createPowerUser.Succeeded)
                 {
                     //here we tie the new user to the "Admin" role 
-                    await UserManager.AddToRoleAsync(admin1, "Admin");
+                    await UserManager.AddToRoleAsync(admin, "Admin");
 
                 }
             }

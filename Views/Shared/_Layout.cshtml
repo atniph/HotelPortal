@@ -8,6 +8,7 @@
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/SearchField.css" />
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
@@ -41,26 +42,6 @@
             </div>
         </div>
     </nav>
-    <div class="searchfield">
-        <div class="leftColumn">
-            @if (ViewBag.Cities != null)
-            {
-                @using (Html.BeginForm("List", "Rooms", FormMethod.Get))
-                {
-                    <p>City:</p> @Html.DropDownList("cityId", new SelectList(ViewBag.Cities, "Id", "Name"))
-                    <p>Min stars:</p> @Html.DropDownList("stars", new SelectList(new List<int> { 1, 2, 3, 4, 5 }))
-                    <p>Min price:</p>@Html.TextBox("min", "", new { @type = "number" , @min = 0 })
-                    <p>Max price:</p>@Html.TextBox("max", "", new { @type = "number" , @min = 0})
-                    <p>Number of Guests:</p>@Html.TextBox("guest", "", new { @type = "number" , @min = 0 })
-                    <p>From:</p>@Html.TextBox("from", "", new { @type = "date" , required = "required" })
-                    <p>To:</p>@Html.TextBox("to", "", new { @type = "date" , required = "required"})
-                    <div>
-                        <input type="submit" value="Search" />
-                    </div>
-                }
-            }
-        </div>
-    </div>
             <partial name="_CookieConsentPartial" />
 
             <div class="container body-content">
