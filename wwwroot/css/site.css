@@ -12,6 +12,11 @@ body {
     padding-right: 15px;
 }
 
+.body-searchfield {
+    align-content: center;
+    text-align: center;
+}
+
 /* Carousel */
 .carousel-caption p {
     font-size: 20px;
