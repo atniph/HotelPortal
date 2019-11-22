@@ -18,23 +18,33 @@
     <hr />
     <div class="row">
         <div class="col-md-4">
-            <form enctype="multipart/form-data" asp-action="Edit">
+            <form enctype="multipart/form-data" asp-action="Edit" class="form-horizontal">
+                <div class="form-group" id="rooms">
+                    <input class="btn btn-default col-md-12" value="Add Room"
+                           onclick="location.href='@Url.Action("Create", "Rooms", new { hotelId = Model.Id })'" />
+                </div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
+                    <label asp-for="Name" class="control-label col-sm-3"></label>
+                    <div class="col-sm-9">
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="CityId" class="control-label"></label>
-                    <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
-                    <span asp-validation-for="CityId" class="text-danger"></span>
+                    <label asp-for="CityId" class="control-label col-sm-3"></label>
+                    <div class="col-sm-9">
+                        <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                        <span asp-validation-for="CityId" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Latitude" class="control-label"></label>
-                    <input asp-for="Latitude" class="form-control" />
-                    <span asp-validation-for="Latitude" class="text-danger"></span>
+                    <label asp-for="Latitude" class="control-label col-sm-3"></label>
+                    <div class="col-sm-9">
+                        <input asp-for="Latitude" class="form-control" />
+                        <span asp-validation-for="Latitude" class="text-danger"></span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="Longitude" class="control-label"></label>
@@ -56,7 +66,10 @@
                     <span asp-validation-for="Images" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-default col-md-12" />
+                </div>
+                <div class="form-group">
+                    <a asp-action="Index" class="btn btn-default col-md-12">Back to List</a>
                 </div>
             </form>
         </div>
@@ -75,15 +88,7 @@
                 }
             }
         </div>
-        <div id="rooms">
-            <input type="button" value="Add Room" onclick="location.href='@Url.Action("Create", "Rooms", new { hotelId = Model.Id })'" />
-        </div>
     </div>
-
-    <div>
-        <a asp-action="Index">Back to List</a>
-    </div>
-
 </body>
 </html>
 
