@@ -13,80 +13,113 @@
     <title>Edit</title>
 </head>
 <body>
-
-    <h4>Hotel</h4>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>Hotel</h4>
+        </div>
+    </div>
     <hr />
     <div class="row">
-        <div class="col-md-4">
-            <form enctype="multipart/form-data" asp-action="Edit" class="form-horizontal">
-                <div class="form-group" id="rooms">
-                    <input class="btn btn-default col-md-12" value="Add Room"
-                           onclick="location.href='@Url.Action("Create", "Rooms", new { hotelId = Model.Id })'" />
+        <div class="col-sm-4">
+            <form enctype="multipart/form-data" asp-action="Edit">
+                <div class="form-group row" id="rooms">
+                    <div class="col-md-12">
+
+                    </div>
+                    <div class=" col-md-12">
+                        <input class="btn btn-primary form-control" value="Add Room"
+                               onclick="location.href='@Url.Action("Create", "Rooms", new { hotelId = Model.Id })'" />
+                    </div>
                 </div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="Id" />
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label col-sm-3"></label>
-                    <div class="col-sm-9">
+                <div class="form-group row">
+                    <label asp-for="Name" class="control-label col-md-3"></label>
+                    <div class="col-md-9">
                         <input asp-for="Name" class="form-control" />
                         <span asp-validation-for="Name" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label asp-for="CityId" class="control-label col-sm-3"></label>
                     <div class="col-sm-9">
                         <select asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
                         <span asp-validation-for="CityId" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group row">
                     <label asp-for="Latitude" class="control-label col-sm-3"></label>
                     <div class="col-sm-9">
                         <input asp-for="Latitude" class="form-control" />
                         <span asp-validation-for="Latitude" class="text-danger"></span>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Longitude" class="control-label"></label>
-                    <input asp-for="Longitude" class="form-control" />
-                    <span asp-validation-for="Longitude" class="text-danger"></span>
+                <div class="form-group row">
+                    <label asp-for="Longitude" class="control-label col-sm-3"></label>
+                    <div class="col-sm-9">
+                        <input asp-for="Longitude" class="form-control" />
+                        <span asp-validation-for="Longitude" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
+                <div class="form-group row">
+                    <label asp-for="Description" class="control-label col-sm-1"></label>
+                    <div class="col-sm-12">
+                        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Stars" class="control-label">Stars</label>
-                    <select asp-for="Stars" class="form-control" asp-items="ViewBag.Stars"></select>
+                <div class="form-group row">
+                    <label asp-for="Stars" class="control-label col-md-3">Stars</label>
+                    <div class="col-md-9">
+                        <select asp-for="Stars" class="form-control" asp-items="ViewBag.Stars"></select>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Images" class="control-label"></label>
-                    <input asp-for="Images" type="file" multiple />
-                    <span asp-validation-for="Images" class="text-danger"></span>
+                <div class="form-group row">
+                    <label asp-for="Images" class="control-label col-sm-3"></label>
+                    <div class="col-md-9">
+                        <input asp-for="Images" type="file" multiple />
+                        <span asp-validation-for="Images" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-default col-md-12" />
-                </div>
-                <div class="form-group">
-                    <a asp-action="Index" class="btn btn-default col-md-12">Back to List</a>
+                <div class="form-group row">
+                    <div class="col-sm-6">
+                        <a asp-action="Index" class="btn btn-default btn-block">Back to list</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                    </div>
                 </div>
             </form>
         </div>
-        <div id="images">
-            @if (ViewBag.ImageIds != null)
-            {
-                foreach (var id in ViewBag.ImageIds)
-                {
-                    <div class="col-md-4">
-                        <input name="imageIDs" value="id" type="hidden">
-                        <img class="contentImage" src="@Url.Action("HotelImage", new {imageId = id})" width="50" height="50" />
-                        <input type="button" value="Remove" onclick="location.href='@Url.Action("RemoveHotelImage", new {imageId = id})'" />
-
-
+        <div class="col-sm-4">
+            <div id="images">
+                <div class="col-sm-12">
+                    <label asp-for="Images" class="control-label col-sm-12"></label>
+                </div>
+                @if (ViewBag.ImageIds != null)
+                 {
+                    <div class="row" style="padding-bottom:15px">
+                        @foreach (var id in ViewBag.ImageIds)
+                        {
+                            <div>
+                                <div class="col-sm-12">
+                                    <div class="thumbnail">
+                                        <img src="@Url.Action("HotelImage", new {imageId = id})" />
+                                        <div class="caption">
+                                            <p>
+                                                <a class="btn btn-primary"
+                                                   onclick="location.href='@Url.Action("RemoveHotelImage", new { imageId = id })'">
+                                                    Remove
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
                     </div>
-                }
-            }
+                 }
+            </div>
         </div>
     </div>
 </body>
