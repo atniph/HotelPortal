@@ -9,106 +9,154 @@
     <meta name="viewport" content="width=device-width" />
     <title>Details</title>
 </head>
-
-
-<div class="body-content">
-    <h4>Hotel</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Latitude)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Longitude)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Stars)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Stars)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.City)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.City.Id)
-        </dd>
-    </dl>
-    <div id="images">
+<hr />
+<div class="row">    
+    <div style="padding-bottom:15px;">
+        <div class="col-sm-1">
+            <a asp-action="Index" class="btn btn-default">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+        </div>
+        <div class="col-sm-11">
+            <h2 style="margin:inherit;">@ViewData.Model.Name</h2>
+        </div>
+    </div>
+    <div class="col-sm-12" style="padding-top:15px">
         @if (ViewBag.ImageIds != null)
         {
-            foreach (var id in ViewBag.ImageIds)
-            {
-                <div class="col-md-4">
-                    <input name="imageIDs" value="id" type="hidden">
-                    <img class="contentImage" src="@Url.Action("HotelImage", new {imageId = id})" width="50" height="50" />
+            <div class="flex-row row">
+                <div class="col-sm-6">
+                    <!--Carousel ugly but works...-->
+                    <div class="flex-row thumbnail">
+                        <div class="carousel" id="imagescar">
+                            <div class="carousel-indicators">
+                                @if (true)
+                                {
+                                    int i = 0;
+                                    foreach (var id in ViewBag.ImageIds)
+                                    {
+                                        if (i == 0)
+                                        {
+                                            <li data-target="imagescar" data-slide-to="@i" class="active"></li>
+                                        }
+                                        else
+                                        {
+                                            <li data-target="imagescar" data-slide-to="@i"></li>
+                                        }
+                                        i++;
+                                    }
+                                }
+                            </div>
+                            <div class="carousel-inner" role="listbox" style="width:100%; height:300px">
+                                @if (true)
+                                {
+                                    int i = 0;
+                                    foreach (var id in ViewBag.ImageIds)
+                                    {
+                                        if (i != 0)
+                                        {
+                                            <input name="imageIDs" value="id" type="hidden">
+                                            <div class="item">
+                                                <img class="contentImage" src="@Url.Action("HotelImage", new {imageId = id})" />
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <input name="imageIDs" value="id" type="hidden">
+                                            <div class="item active">
+                                                <img class="contentImage" src="@Url.Action("HotelImage", new {imageId = id})" />
+                                            </div>
+                                        }
+                                        i++;
+                                    }
+                                }
+                            </div>
+                            <a class="left carousel-control" href="#imagescar" role="button" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="right carousel-control" href="#imagescar" role="button" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>                 
                 </div>
-            }
+                <!--Desctiprion-->
+                <div class="col-sm-6">
+                    <h3>City: @ViewData.Model.City.Name</h3>
+                    <div style="padding-bottom:10px;">
+                        @for (int i = 0; i < ViewData.Model.Stars; i++)
+                        {
+                            <span class="glyphicon glyphicon-star"></span>
+                        }
+                    </div>
+                    <div class="col-sm-pull-12" style="width:100%;">
+                        <div class="panel panel-info" style="padding-bottom:15px; height:250px; width:100%;">
+                            <div class="panel panel-heading">Descprition</div>
+                            <div class="flex-text">
+                                <p class="panel-body" style="border-radius:5px;">@Model.Description</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
     </div>
-
-
-    <a asp-controller="Reviews" asp-action="Create" asp-route-hotelId="@Model.Id" class="contentLink">Write a Review</a> |
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
 </div>
-
-<div class="right">
-    <h4>Reviews</h4>
-    @if (ViewBag.Reviews != null)
+<div class="row">
+    @if (User.IsInRole("Admin") || User.IsInRole("User"))
     {
-        foreach (var r in ViewBag.Reviews)
-        {
-            <p>Stars: @r.Stars <br />@r.Description</p>
-            @if (User.IsInRole("Admin"))
+        <div class="col-sm-6" style="padding-bottom:15px">
+            <a class="btn btn-primary btn-block" asp-controller="Reviews" asp-action="Create" asp-route-hotelId="@Model.Id" class="contentLink">Write a Review</a>
+        </div>
+    }
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="col-sm-6" style="padding-bottom:15px">
+            <a class="btn btn-primary btn-block" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        </div>
+    }
+</div>
+<hr />
+        <div class="right">
+            <h4>Reviews</h4>
+            @if (ViewBag.Reviews != null)
             {
-                <input type="button" value="Remove review" onclick="location.href='@Url.Action("Delete", "Reviews", new {id = r.Id})'" />
+                foreach (var r in ViewBag.Reviews)
+                {
+                    <p>Stars: @r.Stars <br />@r.Description</p>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <input type="button" value="Remove review" onclick="location.href='@Url.Action("Delete", "Reviews", new {id = r.Id})'" />
+                    }
+                    <br />
+                }
             }
-            <br />
-        }
-    }
-</div>
-<table>
-    <h4>Rooms</h4>
-    @foreach (Room room in Model.Rooms)
-    {
-        <tr>
-            <td>
-                <a asp-action="Details" asp-controller="Rooms" asp-route-id="@room.Id">Room details</a> |
-                <a asp-action="Edit" asp-controller="Rooms" asp-route-id="@room.Id">Edit room</a> |
-                <a asp-controller="Bookings" asp-action="Create" asp-route-id="@room.Id">Reserve room</a>
-                <div>
-                    Room Id: @room.Id
-                </div>
-                <div>
-                    Room Capacity: @room.Capacity
-                </div>
-                <div>
-                    Room Price:@room.Price
-                </div>
-                <div class="col-md-4">
-                    <img class="contentImage" src="@Url.Action("RoomMainImage","Rooms", new {parentId = room.Id})" width="50" height="50" />
-                </div>
+        </div>
+        <table>
+            <h4>Rooms</h4>
+            @foreach (Room room in Model.Rooms)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-controller="Rooms" asp-route-id="@room.Id">Room details</a> |
+                        <a asp-action="Edit" asp-controller="Rooms" asp-route-id="@room.Id">Edit room</a> |
+                        <a asp-controller="Bookings" asp-action="Create" asp-route-id="@room.Id">Reserve room</a>
+                        <div>
+                            Room Id: @room.Id
+                        </div>
+                        <div>
+                            Room Capacity: @room.Capacity
+                        </div>
+                        <div>
+                            Room Price:@room.Price
+                        </div>
+                        <div class="col-md-4">
+                            <img class="contentImage" src="@Url.Action("RoomMainImage","Rooms", new {parentId = room.Id})" width="50" height="50" />
+                        </div>
 
-            </td>
-        </tr>
-    }
-</table>
+                    </td>
+                </tr>
+            }
+        </table>
