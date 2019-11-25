@@ -231,6 +231,24 @@ namespace HotelPortal.Models
             return true;
         }
 
+        public async Task<City> CreateCity(int? cityId, string name)
+        {
+            var city = _context.Cities.Where(param => param.Name == name);
+            if(!city.Any())
+            {
+                City newcity = new City
+                {
+                    Name = name
+                };
+                _context.Cities.Add(newcity);
+                await _context.SaveChangesAsync();
+
+                return _context.Cities.Where(param => param.Name == name).FirstOrDefault();
+            }
+
+            return city.FirstOrDefault();
+        }
+
         public async Task<Boolean> CreateReviewAsync(int? hotelId, Review review)
         {
             if (hotelId == null || review == null)
@@ -284,9 +302,11 @@ namespace HotelPortal.Models
 
         public async Task<int> CreateHotelAsync(HotelViewModel hotel)
         {
+            City city = await CreateCity(null, hotel.CityName);
+
             Hotel newHotel = new Hotel
             {
-                CityId = hotel.CityId,
+                CityId = city.Id,
                 Name = hotel.Name,
                 Description = hotel.Description,
                 Longitude = hotel.Longitude,

@@ -8,6 +8,8 @@ namespace HotelPortal.Models.HotelViewModels
     {
         [Required]
         public string Name { get; set; }
+        [Required]
+        public string CityName { get; set; }
         public int CityId { get; set; }
         [Required]
         public double Latitude { get; set; }

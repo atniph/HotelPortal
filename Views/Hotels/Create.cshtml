@@ -21,7 +21,9 @@
             <div class="form-group row">
                 <label asp-for="CityId" class="control-label col-sm-3">City</label>
                 <div class="col-sm-9">
-                    <select list="CityId" asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>
+                    <input asp-for="CityName" class="form-control" />
+                    <span asp-validation-for="CityName" class="text-danger"></span>
+                    <!--<select list="CityId" asp-for="CityId" class="form-control" asp-items="ViewBag.CityId"></select>-->
                 </div>
             </div>
             <div class="form-group row">
