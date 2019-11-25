@@ -30,7 +30,7 @@
                     <div class="flex-row thumbnail">
                         <div class="carousel" id="imagescar">
                             <div class="carousel-indicators">
-                                @if (true)
+                                @if(true)
                                 {
                                     int i = 0;
                                     foreach (var id in ViewBag.ImageIds)
@@ -45,7 +45,7 @@
                                         }
                                         i++;
                                     }
-                                }
+                                 }
                             </div>
                             <div class="carousel-inner" role="listbox" style="width:100%; height:300px">
                                 @if (true)
@@ -69,7 +69,14 @@
                                         }
                                         i++;
                                     }
+                                    if(i == 0)
+                                    {
+                                        <div class="item active">
+                                            <img class="contentImage" src="~/images/no_image.jpg" style="height:300px;" />
+                                        </div>
+                                    }
                                 }
+
                             </div>
                             <a class="left carousel-control" href="#imagescar" role="button" data-slide="prev">
                                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
