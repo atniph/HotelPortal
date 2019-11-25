@@ -1,4 +1,6 @@
-﻿@model HotelPortal.Models.Room
+﻿@model HotelPortal.Models.RoomViewModels.RoomViewModel
+@using HotelPortal.Models
+@using HotelPortal.Models
 
 @{
     ViewData["Title"] = "Delete";
@@ -63,10 +65,10 @@
             @Html.DisplayFor(model => model.Capacity)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Hotel)
+            @Html.DisplayNameFor(model => model.HotelId)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Hotel.Id)
+            @Html.DisplayFor(model => model.HotelId)
         </dd>
     </dl>
 
