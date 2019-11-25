@@ -13,52 +13,102 @@
 
     <h3>Are you sure you want to delete this?</h3>
     <div>
-        <h4>Hotel</h4>
         <hr />
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Latitude)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Latitude)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Longitude)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Longitude)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Description)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Description)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Stars)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Stars)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.City)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.City.Id)
-            </dd>
-        </dl>
-
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            <a asp-action="Index">Back to List</a>
-        </form>
+        <div class="row">
+            <div class="col-sm-4">                
+                <form asp-action="Delete">
+                    <h2>Hotel</h2>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="Id" />
+                    <div class="form-group row">
+                        <label asp-for="Name" class="control-label col-md-3"></label>
+                        <div class="col-md-9">
+                            <input asp-for="Name" class="form-control" disabled />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="CityId" class="control-label col-sm-3"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="CityId" class="form-control" asp-items="ViewBag.CityId" disabled />
+                            <span asp-validation-for="CityId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Latitude" class="control-label col-sm-3"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="Latitude" class="form-control" disabled />
+                            <span asp-validation-for="Latitude" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Longitude" class="control-label col-sm-3"></label>
+                        <div class="col-sm-9">
+                            <input asp-for="Longitude" class="form-control" disabled />
+                            <span asp-validation-for="Longitude" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Description" class="control-label col-sm-1"></label>
+                        <div class="col-sm-12">
+                            <textarea asp-for="Description" class="form-control" rows="5" disabled></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="Stars" class="control-label col-md-3">Stars</label>
+                        <div class="col-md-9">
+                            <input asp-for="Stars" class="form-control" asp-items="ViewBag.Stars" disabled />
+                        </div>
+                    </div>
+                    <!--<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Latitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Latitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Longitude)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Longitude)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stars)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Stars)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City.Id)
+        </dd>
+    </dl>-->
+                    <div class="col-sm-6">
+                        <a class="btn btn-default form-control" asp-action="Index">Back to List</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Delete" class="btn btn-danger btn-block" />
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </body>
 </html>

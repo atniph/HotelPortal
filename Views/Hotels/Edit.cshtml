@@ -19,12 +19,15 @@
             <form enctype="multipart/form-data" asp-action="Edit">
                 <h2>Hotel</h2>
                 <div class="form-group row" id="rooms">
-                    <div class="col-md-12">
-
+                    <div class="col-sm-12">
                     </div>
-                    <div class=" col-md-12">
+                    <div class="col-sm-6" style="padding-bottom:10px">
                         <input class="btn btn-primary form-control" value="Add Room"
                                onclick="location.href='@Url.Action("Create", "Rooms", new { hotelId = Model.Id })'" />
+                    </div>
+                    <div class="col-sm-6">
+                        <input class="btn btn-warning form-control" value="Delete"
+                               onclick="location.href='@Url.Action("Delete", new { Model.Id })'"/>
                     </div>
                 </div>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -104,8 +107,9 @@
                                     <div class="flex-row thumbnail">
                                         <img src="@Url.Action("HotelImage", new {imageId = id})" />
                                         <div class="caption">
+                                            <p class="flex-text"></p>
                                             <p>
-                                                <a class="btn btn-primary btn-block"
+                                                <a class="btn btn-warning btn-block"
                                                    onclick="location.href='@Url.Action("RemoveHotelImage", new { imageId = id })'">
                                                     Remove
                                                 </a>
