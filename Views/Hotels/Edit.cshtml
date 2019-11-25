@@ -13,15 +13,11 @@
     <title>Edit</title>
 </head>
 <body>
-    <div class="row">
-        <div class="col-sm-4">
-            <h4>Hotel</h4>
-        </div>
-    </div>
     <hr />
     <div class="row">
         <div class="col-sm-4">
             <form enctype="multipart/form-data" asp-action="Edit">
+                <h2>Hotel</h2>
                 <div class="form-group row" id="rooms">
                     <div class="col-md-12">
 
@@ -82,32 +78,34 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <div class="col-sm-6">
-                        <a asp-action="Index" class="btn btn-default btn-block">Back to list</a>
+                    <div class="col-sm-6" style="padding-bottom:5px">
+                        <a asp-action="Index" class="btn btn-default form-control">Back to list</a>
                     </div>
-                    <div class="col-sm-6">
-                        <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                    <div class="col-sm-6" style="padding-bottom:5px">
+                        <input type="submit" value="Save" class="btn btn-primary form-control" />
                     </div>
                 </div>
             </form>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-8">
             <div id="images">
                 <div class="col-sm-12">
-                    <label asp-for="Images" class="control-label col-sm-12"></label>
+                    <h2>Images:</h2>
+                    <!--<label asp-for="Images" class="control-label col-sm-12"></label>-->
                 </div>
                 @if (ViewBag.ImageIds != null)
                  {
-                    <div class="row" style="padding-bottom:15px">
-                        @foreach (var id in ViewBag.ImageIds)
-                        {
-                            <div>
-                                <div class="col-sm-12">
-                                    <div class="thumbnail">
+                    <div>
+                        <!-- Bootstrap 4 cards... -->
+                        <div class="flex-row row">
+                            @foreach (var id in ViewBag.ImageIds)
+                            {
+                                <div class="col-sm-4">
+                                    <div class="flex-row thumbnail">
                                         <img src="@Url.Action("HotelImage", new {imageId = id})" />
                                         <div class="caption">
                                             <p>
-                                                <a class="btn btn-primary"
+                                                <a class="btn btn-primary btn-block"
                                                    onclick="location.href='@Url.Action("RemoveHotelImage", new { imageId = id })'">
                                                     Remove
                                                 </a>
@@ -115,8 +113,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                        </div>
                     </div>
                  }
             </div>
