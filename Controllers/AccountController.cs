@@ -91,7 +91,7 @@ namespace HotelPortal.Controllers
                     if (!String.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                         return Redirect(returnUrl);
                     else
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Hotels");
                 }
                 else
                 {

@@ -10,27 +10,42 @@
 <h4>Room</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-sm-4">
         <form enctype="multipart/form-data" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Price" class="control-label"></label>
-                <input asp-for="Price" class="form-control" />
-                <span asp-validation-for="Price" class="text-danger"></span>
+            <div class="form-group row">
+                <label asp-for="Price" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Capacity" class="control-label"></label>
-                <input asp-for="Capacity" class="form-control" />
-                <span asp-validation-for="Capacity" class="text-danger"></span>
+            <div class="form-group row">
+                <label asp-for="Capacity" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Capacity" class="form-control" />
+                    <span asp-validation-for="Capacity" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Images" class="control-label"></label>
-                <input asp-for="Images" type="file" multiple />
-                <span asp-validation-for="Images" class="text-danger"></span>
+            <div class="form-group row">
+                <label asp-for="Images" class="control-label col-sm-3"></label>
+                <div class="col-sm-9">
+                    <input asp-for="Images" type="file" multiple />
+                    <span asp-validation-for="Images" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group row">
+                <div class="col-sm-6" style="padding-bottom:10px">
+                    <a value="GO BACK" class="btn btn-default btn-block"
+                           onclick="window.location.pathname = '/Rooms/Details/@Model.Id'">Back</a>
+                </div>
+                <div class="col-sm-6" style="padding-bottom:10px">
+                    <input type="submit" value="Save" class="btn btn-primary btn-block" />
+                </div>
+                <div class="col-sm-12" style="padding-bottom:10px">
+                    <a class="btn btn-warning btn-block" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
+                </div>                
             </div>
         </form>
         <div id="images">
@@ -51,13 +66,6 @@
     </div>
 </div>
 
-<a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-
-
-<div>
-    <input type="button" value="GO BACK" class="btn btn-primary"
-           onclick="window.location.pathname = '/Rooms/Details/@Model.Id'" />
-</div>
 
 @section Scripts {
     @await Html.PartialAsync("_ValidationScriptsPartial")

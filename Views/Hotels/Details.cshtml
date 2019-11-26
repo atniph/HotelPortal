@@ -101,17 +101,18 @@
                     <div class="col-sm-pull-12" style="width:100%;">
                         <div class="panel panel-info" style="padding-bottom:15px; height:250px; width:100%;">
                             <div class="panel panel-heading" style="padding-bottom:5px;padding-top:5px;">
-                                @if (User.IsInRole("Admin"))
-                                {
-                                    <div class="row">
-                                        <div class="col-sm-9">
-                                            <label style="padding-top:6px;">Description </label>
-                                        </div>
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <label style="padding-top:6px;">Description </label>
+                                    </div>
+                                    @if (User.IsInRole("Admin"))
+                                    {
                                         <div class="col-sm-3">
                                             <a class="btn btn-primary btn-block" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
                                         </div>
+                                    }
                                     </div>                                   
-                                }
+                                
                             </div>
                             <div class="flex-text">
                                 <p class="panel-body" style="border-radius:5px;">@Model.Description</p>
