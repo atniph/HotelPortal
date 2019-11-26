@@ -4,42 +4,37 @@
     ViewData["Title"] = "Delete";
 }
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Review</h4>
+<body>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Stars)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Stars)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Hotel)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Hotel.Id)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+    <div class="row">
+        <div class="col-sm-4">
+            <form asp-action="Delete">
+                <h2>Are you sure you want to delete this review?</h2>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group row">
+                    <label asp-for="Stars" class="control-label col-sm-3"></label>
+                    <div class="col-sm-9">
+                        <input asp-for="Stars" class="form-control" disabled/>
+                        <span asp-validation-for="Stars" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Description" class="control-label col-sm-1"></label>
+                    <div class="col-sm-12">
+                        <textarea asp-for="Description" class="form-control" rows="5" disabled></textarea>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-6" style="padding-bottom:10px;">
+                        <a class="btn btn-default btn-block" onclick="location.href='@Url.Action("Details","Hotels", new {id = Model.HotelId })'">Back to Hotel</a>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="submit" value="Delete" class="btn btn-danger btn-block" />
+                    </div>                  
+                </div>                
+            </form>
+        </div>
+    </div>
+</body>
+
