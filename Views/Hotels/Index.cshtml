@@ -1,98 +1,128 @@
 ﻿@model IEnumerable<HotelPortal.Models.Hotel>
-
+@using HotelPortal.Controllers
 @{
     ViewData["Title"] = "Index";
 }
-<div>
-    <div>
-        <div class="search">    
-            @if (ViewBag.Cities != null)            
-            {                
-                @using (Html.BeginForm("List", "Rooms", FormMethod.Get))            
-                {            
-                    <p>City:</p> @Html.DropDownList("cityId", new SelectList(ViewBag.Cities, "Id", "Name"))                
-                    <p>Min stars:</p> @Html.DropDownList("stars", new SelectList(new List<int> { 1, 2, 3, 4, 5 }))                
-                    <p>Min price:</p>@Html.TextBox("min", "", new { @type = "number", @min = 0 })                
-                    <p>Max price:</p>@Html.TextBox("max", "", new { @type = "number", @min = 0 })                
-                    <p>Number of Guests:</p>@Html.TextBox("guest", "", new { @type = "number", @min = 0 })                
-                    <p>From:</p>@Html.TextBox("from", "", new { @type = "date", required = "required" })                
-                    <p>To:</p>@Html.TextBox("to", "", new { @type = "date", required = "required" })                
-                    <div>                
-                        <input type="submit" value="Search" />                    
-                    </div>                
-                 }            
-            }     
-        </div>    
-    </div>
-    <h2>Index</h2>
-    @if (User.IsInRole("Admin"))
-    {
-        <p>
-            <a asp-action="Create">Create New</a>
-        </p>
-    }
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Latitude)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Longitude)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.City)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Stars)
-                </th>
-                <th>
-                    @Html.DisplayText("HotelImage")
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
+
+<body>
+    <hr />
+    <div class="row">
+        <div class="col-sm-8">
+            <div class="panel panel-info">
+                <div class="panel panel-heading">
+                    <label>Search</label>
+                </div>
+                <div class="panel panel-body">
+                    <form asp-controller="Rooms" asp-action="List">
+                        <div class="text-danger"></div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">
+                                <label class="control-label">City: </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select name="cityId" class="form-control">
+                                    @foreach (var item in ViewBag.Cities)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-sm-1">
+                                <label class="control-label">Stars: </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <select name="stars" class="form-control">
+                                    @for (int i = 1; i < 6; i++)
+                                    {
+                                        <option>@i</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-sm-1">
+                                <label class="control-label">Guests: </label>
+                            </div>
+                            <div class="col-sm-2">
+                                <input name="guest" class="form-control" type="number" min="0" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">
+                                <label class="control-label">Min price: </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input name="min" class="form-control" type="number" min="0" />
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Max price: </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input name="max" class="form-control" type="number" min="0" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-2">
+                                <label class="control-label">Start date:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input name="from" class="form-control" type="date" required />
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">End date:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input name="to" class="form-control" type="date" required />
+                                <span class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <input class="btn btn-primary btn-block" type="submit" value="Search Rooms" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <h2>Some of our best hotels</h2>
+            <div>
+            </div>
             @if (Model != null)
             {
-                @foreach (var item in Model)
+                int count = 5;
+                if (Model.Count() < count)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Latitude)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Longitude)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.City.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Stars)
-                        </td>
-                        <td>
-                            <img src="@Url.Action("HotelMainImage", new { parentId = item.Id })" class="contentImage" width="50" height="50" />
-                        </td>
-                        <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                        </td>
-                    </tr>
+                    count = Model.Count();
+                }
+
+                for (int i = 0; i < count; i++)
+                {
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a onclick="location.href='@Url.Action("Details","Hotels",new {id=Model.ElementAt(i).Id })'"><b>@Model.ElementAt(i).Name</b></a>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <img src="@Url.Action("HotelMainImage", new {parentid=Model.ElementAt(i).Id })" width="100" height="100" />
+                                </div>
+                                <div class="col-sm-8">
+                                    <label class="label label-default">City: @Model.ElementAt(i).City.Name</label>
+                                    <p>@Model.ElementAt(i).Description</p>
+                                </div>
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <div class="col-sm-12">
+                                        <a class="btn btn-default btn-block" onclick="location.href='@Url.Action("Edit","Hotels", new {id=Model.ElementAt(i).Id})'">
+                                            Edit
+                                        </a>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
                 }
             }
-        </tbody>
-    </table>
-</div>
+        </div>
+    </div>
+</body>

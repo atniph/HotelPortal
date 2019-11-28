@@ -51,7 +51,7 @@ namespace HotelPortal.Controllers
         public async Task<IActionResult> Create(RoomViewModel room, int? hotelId)
         {
             if (hotelId == null || room == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Hotels");
             if (ModelState.IsValid)
             {
                 var id = _portalService.CreateRoomAsync(room, hotelId).Result;

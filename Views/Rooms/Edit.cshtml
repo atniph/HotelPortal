@@ -5,12 +5,12 @@
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit</h2>
-
-<h4>Room</h4>
 <hr />
 <div class="row">
     <div class="col-sm-4">
+        <h2>Edit</h2>
+
+        <h4>Room</h4>
         <form enctype="multipart/form-data" asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
@@ -38,32 +38,56 @@
             <div class="form-group row">
                 <div class="col-sm-6" style="padding-bottom:10px">
                     <a value="GO BACK" class="btn btn-default btn-block"
-                           onclick="window.location.pathname = '/Rooms/Details/@Model.Id'">Back</a>
+                       onclick="window.location.pathname = '/Rooms/Details/@Model.Id'">Back</a>
                 </div>
-                <div class="col-sm-6" style="padding-bottom:10px">
+                <div class="col-sm-6">
                     <input type="submit" value="Save" class="btn btn-primary btn-block" />
                 </div>
-                <div class="col-sm-12" style="padding-bottom:10px">
-                    <a class="btn btn-warning btn-block" asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
-                </div>                
             </div>
         </form>
-        <div id="images">
-            @if (ViewBag.ImageIds != null)
-            {
-                foreach (var id in ViewBag.ImageIds)
+        <form asp-controller="Rooms" asp-action="Delete">
+            <div class="form-group row">
+                <div class="col-sm-12" style="padding-bottom:10px">
+                    <input type="hidden" value="@Model.Id" name="id" />
+                    <input class="btn btn-warning btn-block" type="submit" value="Delete"/>
+                    <!--asp-controller="Rooms" asp-action="Delete" asp-route-id="@Model.Id"-->
+                </div>
+            </div>
+        </form>
+    </div>
+        <div class="col-sm-8">
+            <div id="images">
+                <div class="col-sm-12">
+                    <h2>Images:</h2>
+                    <!--<label asp-for="Images" class="control-label col-sm-12"></label>-->
+                </div>
+                @if (ViewBag.ImageIds != null)
                 {
-                    <div class="col-md-4">
-                        <input name="imageIDs" value="id" type="hidden">
-                        <img class="contentImage" src="@Url.Action("RoomImage", new {imageId = id})" width="50" height="50" />
-                        <input type="button" value="Remove" onclick="location.href='@Url.Action("RemoveRoomImage", new {imageId = id})'" />
-
-
+                    <div>
+                        <!-- Bootstrap 4 cards... -->
+                        <div class="flex-row row">
+                            @foreach (var id in ViewBag.ImageIds)
+                            {
+                                <div class="col-sm-4">
+                                    <div class="flex-row thumbnail">
+                                        <img src="@Url.Action("RoomImage", new {imageId = id})" />
+                                        <div class="caption">
+                                            <p class="flex-text"></p>
+                                            <p>
+                                                <a class="btn btn-warning btn-block"
+                                                   onclick="location.href='@Url.Action("RemoveRoomImage", new { imageId = id })'">
+                                                    Remove
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
                     </div>
                 }
-            }
+            </div>
         </div>
-    </div>
 </div>
 
 

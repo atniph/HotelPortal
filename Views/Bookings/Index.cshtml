@@ -4,58 +4,50 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Your bookings</h2>
+<hr />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Room.Hotel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Room.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.GuestCount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SiteUser.Name)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.Hotel.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Room.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GuestCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SiteUser.Name)
-            </td>
-            <td>
-                <input type="button" value="Remove" onclick="location.href='@Url.Action("RemoveBooking", new {id = item.Id})'" />
+<div>
+    <table class="table table-hover table-responsive table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Room.Hotel)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.GuestCount)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    <a onclick="location.href='@Url.Action("Details", "Hotels", new {id = item.Room.Hotel.Id})'">@item.Room.Hotel.Name</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GuestCount)
+                </td>
+                <td>
+                    <a class="btn btn-danger btn-block" onclick="location.href='@Url.Action("RemoveBooking", new {id = item.Id})'">Remove</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
 
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+</div>

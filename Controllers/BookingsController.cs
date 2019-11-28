@@ -52,7 +52,7 @@ namespace HotelPortal.Controllers
         public async Task<ActionResult> Create(int? id, BookingViewModel bookingViewModel)
         {
             if (id == null || bookingViewModel == null)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Bookings");
 
             if (!await _portalService.CreateBookingAsync(id, bookingViewModel))
                 ModelState.AddModelError("LastDay", "The room is already reserved at that day!");
