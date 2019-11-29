@@ -9,7 +9,7 @@
 <hr />
 <div class="row">
     <div class="col-sm-4">
-        <form asp-controller="Bookings" asp-action="Create" asp-route-id="@Model.Room.Id">
+        <form asp-controller="Bookings" asp-action="Create" asp-route-id="@Model.Room.Id" name="form" onsubmit="return ValidateForm()">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <h4><b>Personal data:</b></h4>
             <div class="form-group row">
@@ -43,15 +43,25 @@
             <div class="form-group row">
                 <label asp-for="FirstDay" class="control-label col-sm-3"></label>
                 <div class="col-sm-9">
-                    <input asp-for="FirstDay" class="form-control" />
+                    <input asp-for="FirstDay" class="form-control" name="FirstDay" />
                     <span asp-validation-for="FirstDay" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="LastDay" class="control-label col-sm-3"></label>
                 <div class="col-sm-9">
-                    <input asp-for="LastDay" class="form-control" />
+                    <input asp-for="LastDay" class="form-control" name="LastDay" />
                     <span asp-validation-for="LastDay" class="text-danger"></span>
+                    <script>                      
+                        function ValidateForm() {
+                            var first = new Date(document.forms["form"]["FirstDay"].value);
+                            var last = new Date(document.forms["form"]["LastDay"].value);
+                            if (first >= last) {
+                                alert("First day must be before last day!");
+                                return false;
+                            }
+                        }
+                    </script>
                 </div>
             </div>
             <div class="form-group row">

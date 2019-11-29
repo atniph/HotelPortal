@@ -65,7 +65,7 @@ namespace HotelPortal.Controllers
             }
 
             //TODO: return to the result view of the booking
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Hotels");
         }
 
         // GET: Bookings/Edit/
