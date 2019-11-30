@@ -13,7 +13,7 @@
                     <label>Search</label>
                 </div>
                 <div class="panel panel-body">
-                    <form asp-controller="Rooms" asp-action="List">
+                    <form asp-controller="Rooms" asp-action="List" name="form" onsubmit="return ValidateSearch()">
                         <div class="text-danger"></div>
                         <div class="form-group row">
                             <div class="col-sm-2">
@@ -50,13 +50,13 @@
                                 <label class="control-label">Min price: </label>
                             </div>
                             <div class="col-sm-4">
-                                <input name="min" class="form-control" type="number" min="0" />
+                                <input name="min" class="form-control" type="number" />
                             </div>
                             <div class="col-sm-2">
                                 <label class="control-label">Max price: </label>
                             </div>
                             <div class="col-sm-4">
-                                <input name="max" class="form-control" type="number" min="0" />
+                                <input name="max" class="form-control" type="number" />
                             </div>
                         </div>
                         <div class="form-group row">
